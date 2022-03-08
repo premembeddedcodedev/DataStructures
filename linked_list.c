@@ -24,6 +24,105 @@ void print_list()
 	}
 }
 
+void list_rec_reverse(struct node *p)
+{
+	if(!p) {
+		printf("List is empty\n");
+		return;
+	}
+	if(!p->next) {
+		head = p;
+		return;
+	}
+
+	printf(" p: %p\n", p);
+	if(p->next);
+		printf("p->next is exist, %p, \n", p->next);
+	list_rec_reverse(p->next);
+	if(p->next);
+		printf("After: p->next is exist %p, p: %p\n", p->next, p);
+
+	struct node *q = p->next;
+	q->next = p;
+	p->next = NULL;
+}
+
+void list_find_mid()
+{
+	struct node *curr = head, *fast = head;
+
+	if(!curr) {
+		printf("List is empty\n");
+		return;
+	}
+
+	while(fast && fast->next) {
+		curr = curr->next;
+		fast = fast->next->next;
+	}
+
+	printf("Mid node: %d\n", curr->value);
+}
+
+void list_subset_reverse(int up, int lb)
+{
+
+	if(!head) {
+		printf("List is empty\n");
+		return;
+	}
+
+	struct node *last = head, *curr = head, *prev = NULL, *next, *temp;
+	
+	int i;
+
+	printf("up: %d, lb:%d\n", up, lb);
+
+	for (i = 0; curr && i<lb-1; i++) {
+		printf("1st for: i is %d\n", i);
+		next = curr->next;
+		prev = curr;
+		curr = next;
+	}
+	
+	last = prev;
+
+	printf("i is %d\n", i);
+
+	while(curr && i<= up-lb) {
+		printf("2nd for: i is %d\n", i);
+		next = curr->next;
+		curr->next = next->next;
+		next->next = prev->next;
+		prev->next = next;
+		i++;
+	}
+}
+
+
+void list_reverse(struct node *head1)
+{
+
+	if(!head) {
+		printf("List is empty\n");
+		return;
+	}
+	
+	if(!head1)
+		head1 = head;
+
+	struct node *curr = head1, *prev = NULL, *next;
+
+	while(curr) {
+		next = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = next;
+	}
+
+	head = prev;
+}
+
 void list_sort()
 {
 	struct node *temp, *next;
@@ -203,7 +302,7 @@ void add(int val)
 {
 	struct node *list, *new = head, *prev;
 
-	list = (struct node *) malloc (sizeof(struct node *));
+	list = (struct node *) malloc (sizeof(struct node));
 	if(!list)
 		return;
 	list->value = val;
@@ -223,7 +322,7 @@ void add(int val)
 
 int main()
 {
-	int ch, i, val, n;
+	int ch, i, val, n, n2;
 	int num;
 
 	printf("1. add\n");
@@ -231,7 +330,10 @@ int main()
 	printf("3. list_rev\n");
 	printf("4. del_last\n");
 	printf("5. list sorting\n");
-	printf("6. del_node_value\n");
+	printf("6. list reverse\n");
+	printf("7. del_node_value\n");
+	printf("8. find mid\n");
+	printf("9. ll node subset reverse\n");
 
 	while(1) {
 		printf("\nchoice: \n");
@@ -269,10 +371,36 @@ int main()
 				printf("\nsorting elements are: \n");
 				print_list();
 				break;
-			default:
+			case 6:
+				list_reverse(head);
+				printf("\nreversing elements are: \n");
+				print_list();
+				break;
+			case 7:
 				printf("\nEnter Number to be deleted: \n");
 				scanf("%d", &num);
 				del_node_value(num);
+				print_list();
+				break;
+			case 8:
+				printf("\nFinding middle of element: \n");
+				list_find_mid();
+				print_list();
+				break;
+			case 9:
+				printf("\nLinked list Reverse from between nodes\n");
+				printf("\nEnter Number upper bound and lower bound: \n");
+				scanf("%d %d", &n, &n2);
+				list_subset_reverse(n, n2);
+				print_list();
+				break;
+			case 10:
+				printf("\nRecursive linked list: \n");
+				list_rec_reverse(head);
+				print_list();
+				break;
+			default:
+				printf("\nexit from the default...\n");
 				print_list();
 				break;
 
