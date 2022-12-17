@@ -1,0 +1,17 @@
+
+
+1. it can also know as(Aka) Sinking sort/exchangingsort
+
+2. every inner loop will keep the higher/lower element in the end/start
+
+3. space complexity - 0(1)
+
+4. time complexity
+	- worst case : o(n square) - if an array is un-sorted order or descending order
+	- best case : o(n) - if an array is in already sorted order
+
+5. when there is no swap in inner loop, then it consider as sorted array and you can break the full loop
+
+
+TODO:
+	- Need to check stable algo vs unstable (this question comes when 2 similar values in array with different features which one to keep 1st and 2nd if both values are similar)
