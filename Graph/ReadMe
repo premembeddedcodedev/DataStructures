@@ -1,0 +1,20 @@
+Graph:
+	unidirect (2 directions)
+	directed: added directions using arrows
+		cyclic (loop found here)
+		Acyclic (Non-loop)
+
+	labelling:
+		unlableled
+		vertises labeled
+		edge labled 
+	weights (nodes numbers with verises)
+		weighted
+		unweighted 
+	sparsity
+		spark : edges vs vertices will be equal
+		dense : edges vs vertices will not be equal (full conncted graph)
+
+
+ Nodes are vertices
+edges are connected lines

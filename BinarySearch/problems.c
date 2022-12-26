@@ -62,7 +62,12 @@ int main(int argc, char *argv[])
 			case 7: //1095
 				printf("Enter the mountain array value to search: %d\n", atoi(argv[3]));
 				int peak_element = atoi(argv[3]);
-				printf("peak Found: %d\n", order_agnosticarray(a, peak_element, max_array));
+				printf("mountaine array value Found: %d\n", order_agnosticarray(a, peak_element, max_array));
+				break;
+			case 8: //1095
+				printf("Enter the rotate array value to search: %d\n", atoi(argv[3]));
+				int rotate_element = atoi(argv[3]);
+				printf("element Found: %d\n", find_element_in_rotate_sorted_array(a, rotate_element, max_array));
 				break;
 
 			default:
