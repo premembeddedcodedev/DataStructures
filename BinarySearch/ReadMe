@@ -1,5 +1,28 @@
+* Makefile: https://www.youtube.com/watch?v=sZ8GJ1TiMdk&t=6217s : 17:36
+*. Binary search works on sorted array
+*. time complexity : logn
+*. it works on following things:
+	. Unique element in sorted array - https://www.youtube.com/watch?v=nMGL2vlyJk0
+		. properties:
+			. Boundary Check
+			. pair index property (start with even and end with odd index - because of adjascent element)
+			. unique element property
+			. partition property
+	
+	. Ceiling of the array
+		. target has given, need to traverse array find equivalent or greater number.
+		. LeetCode 744: Find smallest number graterthan target
+	
+	. floor of the array
+		. target has given, need to traverse array find equivalent or greater number
 
-1. Binary search works on sorted array
-2. it works on following things:
-	. 
 
+744. Find Smallest Letter Greater Than Target
+34. Find First and Last Position of Element in Sorted Array
+find the element in infinite sorted array
+852. peak index in a mountain array
+1095. Find in Mountain Array
+162. Find Peak Element
+33. Search in Rotated Sorted Array
+Search in Rotated Sorted Array (Duplicates)
+.
