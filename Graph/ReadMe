@@ -16,5 +16,5 @@ Graph:
 		dense : edges vs vertices will not be equal (full conncted graph)
 
 
- Nodes are vertices
+Nodes are vertices
 edges are connected lines

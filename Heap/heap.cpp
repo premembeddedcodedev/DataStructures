@@ -27,7 +27,7 @@ void swap(int *from, int *to)
 	*from = *to;
 	*to = temp;
 }
-
+//percolate algorithm
 void heapify_algo()
 {
 	int curr = 0;
