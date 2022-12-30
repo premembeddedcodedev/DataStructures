@@ -37,23 +37,26 @@ void display(Qnode *Rrear, Qnode *Ffront)
 	printf("%d\n", Ftemp->data);
 }
 
-void dequeue(Qnode *fnode, Qnode *rnode) //TODO: Need to take ** pointer to get the value from function arguement
+void dequeue(Qnode **fnode, Qnode **rnode) //TODO: Need to take ** pointer to get the value from function arguement
 {
-	if(!fnode && !rnode) {
+	if(!*fnode && !*rnode) {
 		printf("\t\t\t\t CQ is empty\n\n");
 		return;
 	}
 
-	if(fnode == rear) { // Corner Case : this condition would be required because there is only one element left in the Q
-		printf("\t\t\t\t last element in Q is : %d\n", fnode->data);
-		free(fnode);
-		front = rear = NULL;
+	if(*fnode == *rnode) { // Corner Case : this condition would be required because there is only one element left in the Q
+		Qnode *dat;
+		dat = *fnode;
+		printf("\t\t\t\t last element in Q is : %d\n", dat->data);
+		free(dat);
+		*fnode = *rnode = NULL;
 		return;
 	}
 
-	Qnode *temp = fnode;
-	front = fnode->next;
-	rear->next = front;
+	Qnode *temp = *fnode;
+	*fnode = temp->next;
+	Qnode *i = *rnode;
+	i->next = *fnode;
 	printf("\t\t\t\t D'Qed Element is %d\n", temp->data);
 	free(temp);
 }
@@ -93,7 +96,7 @@ int main(int argc, char *argv[])
 				enqueue(rear, data);
 				break;
 			case 2:
-				dequeue(front, rear);
+				dequeue(&front, &rear);
 				break;
 			case 3:
 				display(rear, front);
