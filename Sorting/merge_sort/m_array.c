@@ -45,6 +45,8 @@ void merge_both_halves_sort(int Q[], int start, int mid, int end)
 void merge_both_halves_sort1(int arr[], int l, int m, int r)
 {
 	int i, j, k;
+	int n1 = m - l + 1;
+	int n2 =r - m;
 
 	/* create temp arrays */
 	int L[n1], R[n2];
