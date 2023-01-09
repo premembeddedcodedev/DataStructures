@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+//Complexity : O(N2)
+
 #define NUM 5
 
 int main()
@@ -15,6 +17,7 @@ int main()
 	//index values are interchanging with j offsets
 	//j is going left, and i is going right.
 
+	// TODO num should be n-2 to avoid array bound issue
 	for(i=0; i<num; i++) {
 		for(j=i+1; j>0; j--) {
 			if(a[j-1] > a[j]) {
