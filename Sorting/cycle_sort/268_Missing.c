@@ -7,7 +7,7 @@ int missingNumber(int *nums, int numsSize)
 	
 	while(i < numsSize) {
 		temp = nums[i];
-		if(nums[i] != nums[temp] && nums[i] < numsSize)
+		if((nums[i] != nums[temp]) && ((nums[i] < numsSize) || (nums[temp] < numsSize)))
 			pswap(&nums[i], &nums[temp]);			
 		else 
 			i++;
@@ -21,6 +21,5 @@ int missingNumber(int *nums, int numsSize)
 		i++;
 	}
 
-
-	return -1;
+	return numsSize;
 }

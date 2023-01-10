@@ -41,7 +41,7 @@ void cycle_sort_original(int C[], int array_bound, int offset)
 }
 //FIX: Need to fix below code -- if swap happens we are not checking the swapped number in current index is in proper position or not
 //if you go for swap again below for loop will increment the i so do with while
-void cycle_sort(int C[], int array_bound, int offset)
+void cycle_sort_first(int C[], int array_bound, int offset)
 {
 	int temp = 0, i;
 
@@ -54,6 +54,140 @@ void cycle_sort(int C[], int array_bound, int offset)
 			if(C[i] != i && C[i] < array_bound) {
 				swap(&C[i], &C[temp]);
 			}
+		}
+	}
+}
+
+void duplicate_number(int C[], int array_bound, int offset)
+{
+	int temp = 0, i, miss_numbers[5], miss_off[5];
+
+	while(i<array_bound) {
+		if(offset == 1) { // value - 1 we are doing because we need to store the values from 0th offset
+			temp = C[i] - 1;
+			if(C[i] != C[temp] && ((C[i] < array_bound) || (C[temp] < array_bound)))
+				swap(&C[i], &C[temp]);
+			else
+				i++;
+		} else {
+			temp = C[i];
+			if(C[i] != C[temp] && ((C[i] < array_bound) || (C[temp] < array_bound)))
+				swap(&C[i], &C[temp]);
+			else
+				i++;
+		}
+	}
+
+	i = 0;
+	int j = 0, k=0;
+
+	for(i = 0; i<array_bound; i++) {
+		if(C[i] != i+1) {
+			printf("miss_number: %d, miss_off:%d\n", C[i], i);
+			miss_numbers[j++] = C[i];
+			miss_off[k++] = i;
+		}
+	}
+}
+
+void find_all_missing_numbers(int C[], int array_bound, int offset)
+{
+	int temp = 0, i, miss_numbers[5], miss_off[5];
+
+	while(i<array_bound) {
+		if(offset == 1) { // value - 1 we are doing because we need to store the values from 0th offset
+			temp = C[i] - 1;
+			if(C[i] != C[temp] && ((C[i] < array_bound) || (C[temp] < array_bound)))
+				swap(&C[i], &C[temp]);
+			else
+				i++;
+		} else {
+			temp = C[i];
+			if(C[i] != C[temp] && ((C[i] < array_bound) || (C[temp] < array_bound)))
+				swap(&C[i], &C[temp]);
+			else
+				i++;
+		}
+	}
+
+	i = 0;
+	int j = 0, k=0;
+
+	for(i = 0; i<array_bound; i++) {
+		if(C[i] != i+1) {
+			printf("miss_number: %d, miss_off:%d\n", C[i], i);
+			miss_numbers[j++] = C[i];
+			miss_off[k++] = i;
+		}
+	}
+}
+
+void first_missing_positive(int C[], int array_bound, int offset)
+{
+	int temp = 0, i, miss_numbers[5], miss_off[5];
+
+	while(i<array_bound) {
+		if(offset == 1) { // value - 1 we are doing because we need to store the values from 0th offset
+			temp = C[i] - 1;
+			if(C[i] > 0 &&C[i] != C[temp] && ((C[i] < array_bound) || (C[temp] < array_bound)))
+				swap(&C[i], &C[temp]);
+			else
+				i++;
+		} else {
+			temp = C[i];
+			if(C[i] != C[temp] && ((C[i] < array_bound) || (C[temp] < array_bound)))
+				swap(&C[i], &C[temp]);
+			else
+				i++;
+		}
+	}
+
+	i = 0;
+	int j = 0, k=0;
+	
+	if(C[0] > array_bound) {
+		printf("Value %d\n", 1);
+		return;
+	}
+
+
+	for(i = 0; i<array_bound; i++) {
+		if(C[i] != i+1) {
+			printf("miss_number: %d, miss_off:%d\n", C[i], i+1);
+			miss_numbers[j++] = C[i];
+			miss_off[k++] = i;
+		}
+	}
+}
+
+void set_mismatch(int C[], int array_bound, int offset)
+{
+	int temp = 0, i, miss_numbers[5], miss_off[5];
+
+	while(i<array_bound) {
+		if(offset == 1) { // value - 1 we are doing because we need to store the values from 0th offset
+			temp = C[i] - 1;
+			if(C[i] != C[temp] && ((C[i] < array_bound) || (C[temp] < array_bound)))
+				swap(&C[i], &C[temp]);
+			else
+				i++;
+		} else {
+			temp = C[i];
+			if(C[i] != C[temp] && ((C[i] < array_bound) || (C[temp] < array_bound)))
+				swap(&C[i], &C[temp]);
+			else
+				i++;
+		}
+	}
+
+	i = 0;
+	int j = 0, k=0;
+
+	for(i = 0; i<array_bound; i++) {
+		if(C[i] != i+1) {
+			printf("miss_number: %d, miss_off:%d\n", C[i], i+1);
+			miss_numbers[j++] = C[i];
+			miss_off[k++] = i;
 		}
 	}
 }
@@ -77,7 +211,9 @@ int main()
 	display(C, array_bound);
 
 	//cycle_sort_original(C, array_bound, offset);
-	cycle_sort(C, array_bound, offset);
+	//duplicate_number(C, array_bound, offset);
+	//set_mismatch(C, array_bound, offset);
+	first_missing_positive(C, array_bound, offset);
 
 	display(C, array_bound);
 
