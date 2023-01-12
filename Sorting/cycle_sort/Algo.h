@@ -6,7 +6,6 @@
 #include <stdbool.h>
 #include <string.h>
 
-
 void pswap(int *dest, int *src);
 int missingNumber(int *nums, int numsSize);
 int firstMissingPositive(int* nums, int numsSize);

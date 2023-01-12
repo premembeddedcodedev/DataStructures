@@ -6,7 +6,7 @@ int* findDisappearedNumbers(int* nums, int numsSize, int* returnSize)
 
 	while(i<numsSize) {
 		cur_offset = nums[i]-1;
-		if(nums[i] != nums[cur_offset] && ((num[i] < numsSize)&&(num[cur_offset] < numsSize)))
+		if(nums[i] != nums[cur_offset] && ((nums[i] < numsSize)&&(nums[cur_offset] < numsSize)))
 			pswap(&nums[i], &nums[cur_offset]);
 		else
 			i++;

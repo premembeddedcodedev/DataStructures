@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 			scanf("%d", &C[i]);
 		switch(ch) {
 			case 1:
-				//printf("missedvalue = %d\n",missingNumber(C, array_bound));
+				printf("missedvalue = %d\n",missingNumber(C, array_bound));
 				break;
 			case 2:
 				//printf("missedvalue = %d\n",findDisappearedNumbers(C, array_bound));
@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
 				//	printf("missedpositive = %d\n", target[returnSize]);
 				break;
 			case 5:
-				printf("duplicate = %d\n",findDuplicate(C, array_bound));
+				//printf("duplicate = %d\n",findDuplicate(C, array_bound));
 				break;
 			default:
 				break;
