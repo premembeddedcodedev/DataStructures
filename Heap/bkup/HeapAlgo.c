@@ -53,11 +53,11 @@ void heapify_algo()
  * 	2. copy the right/heapsize-1 element into root
  * 	3. reduce the heapsize
  */
-#if 0
+#if 1
 int heap_pop()
 {
 	if(heapSize <= 0) {
-		cout << "Heap is underflow\n";
+		printf("Heap is underflow\n");
 		return -1;
 	}
 
@@ -73,14 +73,15 @@ int heap_pop()
 void heap_push(int element)
 {
 	if(heapSize >= MAX_SIZE) {
-		cout << "Heap Overflowed\n";
+		printf("Heap Overflowed\n");
 		return;
 	}
 
 	heap[heapSize] = element;
 	int curr = heapSize;
 	
-	while(curr > 0 and (heap[(curr-1)/2] < heap[curr]))
+	// curr-1/2 is the partent curr is the root/leaf based on curr-1/2 result.
+	while(curr > 0 && (heap[(curr-1)/2] < heap[curr]))
 	{
 		int temp = heap[(curr-1)/2];
 		heap[(curr-1)/2] = heap[curr];
@@ -94,27 +95,33 @@ void heap_push(int element)
 #endif
 /* its rearranging the data in the tree fashion so no return value observed*/
 //TODO: Need to see if we pass 2 arguments only - what happenss?
-void heapify(int eheap[], int curr, int size)
+void heapify(int eheap[], int root, int size)
 {
-	int largest = curr;
-	int l = 2*curr +1;
-	int r = 2*curr +2;
+	int largest;
+	int l = 2*root +1;
+	int r = 2*root +2;
 
 	/*L and R should be less than the size and greater element of L/R will be moved as parent*/
 
-	if(l<size && (eheap[l] > eheap[largest]))
+	if(l<size && (eheap[l] > eheap[root]))
 		largest = l;
+	else //if the root node is greater than left and right node then largest = root
+		largest = root;
+
 	if(r<size && (eheap[r] > eheap[largest]))
 		largest = r;
 
-	if(largest != curr) {
-		swap(&eheap[curr], &eheap[largest]);
+	//If its leaf node and size of the array is out of bound then below code will run
+
+	if(largest != root) {
+		swap(&eheap[root], &eheap[largest]);
 		heapify(eheap, largest, size);
 	}
 }
 
 void build_heap(int eheap[], int size)
 {
+	// size/2 -1 will give us the height of the heap tree (Binary tree - log2N - so division works here)
 	for(int i=size/2 -1; i>=0; i--)
 		heapify(eheap, i, 0);
 }
@@ -132,7 +139,7 @@ void show(int eheap[], int size)
 void heap_sort(int eheap[], int size)
 {
 	build_heap(eheap, size); // O(N) time complexity
-	show(eheap, 7);
+	show(eheap, size);
 
 	/* 1. swap last element to first element
 	 * 2. heapify will adjust all elements as per the heap rule */
@@ -154,7 +161,6 @@ void heap_inc_key(int eheap[], int element, int key)
 	}
 
 	eheap[element] = key;
-
 
 	// traverse till parent is greater value than current and till reaches 0
 	while(element > 0 && eheap[element/2] < eheap[element]) {
@@ -198,7 +204,9 @@ int main(int argc, char *argv[])
 				//display();
 			break;
 			case 4:
+				show(eheap, 7);
 				build_heap(eheap, 7);
+				show(eheap, 7);
 			break;
 			case 5:
 				heap_sort(eheap, 7);
