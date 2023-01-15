@@ -1,38 +1,49 @@
 #include <stdio.h>
 
-//Complexity : O(N2)
+//i should the ending limit of j and swap the element from j to i incase of greater
 
-#define NUM 5
+void display(int a[], int array_bound)
+{
+	printf("Enter the array values: \n");
+	for(int i=0; i<array_bound; i++)
+		printf("%d\t", a[i]);
+
+	printf("\n");
+}
+
+void swap(int *src, int *dst)
+{
+	int temp = *src;
+	*src = *dst;
+	*dst = temp;
+}
+
+void insertion_sort(int a[], int array_bound)
+{
+	int i, j;
+
+	for(i=1;i<=array_bound; i++) {
+		for(j=0; j<=i; j++) {
+			if(a[j] > a[i])
+				swap(&a[j], &a[i]);
+		}
+	}
+}
 
 int main()
 {
-	int a[NUM], num, temp = 0, i=0, j=0;
+	int array_bound;
+	printf("Enter the array bound\n");
+	scanf("%d", &array_bound);
+	int a[array_bound];
 
-	printf("Enter the array size: ");
-	scanf("%d", &num);
-
-	for(i=0;i<num; i++)
+	printf("Enter the array values: \n");
+	for(int i=0; i<array_bound; i++)
 		scanf("%d", &a[i]);
 
-	//index values are interchanging with j offsets
-	//j is going left, and i is going right.
+	insertion_sort(a, array_bound - 1);
 
-	// TODO num should be n-2 to avoid array bound issue
-	for(i=0; i<num; i++) {
-		for(j=i+1; j>0; j--) {
-			if(a[j-1] > a[j]) {
-				temp = a[j-1];
-				a[j-1] = a[j];
-				a[j] = temp;
-			} else
-				break;
-		}
-	}
-
-	printf("\n Sorted Values are: \t");
-
-	for(i=0;i<num; i++)
-		printf("%d ", a[i]);
+	display(a, array_bound);
 
 	return 0;
 }
