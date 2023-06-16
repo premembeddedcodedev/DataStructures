@@ -66,9 +66,8 @@ void list_find_mid()
 
 void list_subset_reverse(int up, int lb)
 {
-
-	if(!head) {
-		printf("List is empty\n");
+	if(!head || !head->next) {
+		printf("List is empty or List has only element\n");
 		return;
 	}
 
