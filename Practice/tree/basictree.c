@@ -42,7 +42,6 @@ tree_t *create_node(int a[], int array_bound, int *offset)
 	int i = 0;
 	scanf("%d", &i);
 	if(i == 1) {
-		lfstatus = true;
 		printf("\n L:%d => %d =>  ", new->data, a[*offset]);
 		++(*offset);
 		printf("Am Left allocating for: %d\n", a[*offset]);
@@ -54,7 +53,6 @@ tree_t *create_node(int a[], int array_bound, int *offset)
 	int j = 0;
 	scanf("%d", &j);
 	if(j == 1) {
-		rfstatus = true;
 		printf("\n R: %d => %d => ", new->data, a[*offset]);
 		++(*offset);
 		printf("Am right allocating for: %d\n", a[*offset]);
@@ -66,6 +64,23 @@ tree_t *create_node(int a[], int array_bound, int *offset)
 		return new;
 	//else
 	//	return NULL;
+}
+
+int height(tree_t *node)
+{
+	if(!node)
+		return 1;
+	else {
+		int temp;
+
+		int lheight = height(node->left);
+		int rheight = height(node->right);
+
+		if(lheight > rheight)
+			return 1 + lheight;
+		else
+			return 1 + rheight;
+	}
 }
 
 void bfs(int bound)
@@ -97,6 +112,8 @@ int main()
 	tree_display(root);
 
 	bfs(sizeof(a)/sizeof(int));
+
+	printf("Height : %d\n", height(root));
 
 	return 0;
 }
