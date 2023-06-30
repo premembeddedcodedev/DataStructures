@@ -54,7 +54,7 @@ void solve(node *root, int row, int **matrix, int *returnSize, int** returnColum
 	if(!root) {
 		return;
 	}
-	printf(" %d", root->data);
+	printf("%d->", root->data);
 	
 	returnColumnSizes[row] = realloc(returnColumnSizes[row], (*(returnColumnSizes[row]) + 1) * 4);
 
@@ -68,27 +68,6 @@ void solve(node *root, int row, int **matrix, int *returnSize, int** returnColum
 	solve(root->right, row+1, matrix, returnSize, returnColumnSizes);
 }
 
-int** verticalTraversal(node* root, int* returnSize, int** returnColumnSizes)
-{
-	printf("Height of the tree : %d\n", find_height(root));
-	
-	int **matrix = (int **) malloc (sizeof(int *) * (find_height(root) + 3)); // 4 * 2 - based on the height of the tree because negative index is not there as per the youtube logic
-	int beg = 3, end = 3;
-	returnColumnSizes = (int **) malloc (sizeof(int *) * (find_height(root) + 3)); // 4 * 2 - based on the height of the tree because negative index is not there as per the youtube logic
-
-	for (int i = 0; i < find_height(root)+3; i++) {
-		returnColumnSizes[i] = malloc(sizeof(int));
-		matrix[i] = malloc(sizeof(int) * 4);
-		*matrix[i] = 0;
-		*returnColumnSizes[i] = 0;
-	}
-
-	solve(root, beg, matrix, returnSize, returnColumnSizes);
-
-	*returnSize = 4;
-
-	return matrix;
-}
 
 node *build_bintree(int a[], int size, node *root, int *offset)
 {
@@ -121,19 +100,47 @@ node *build_bintree(int a[], int size, node *root, int *offset)
 	return temp;
 }
 
-void print_matrix(int **matrix)
+void print_matrix(int **matrix, int returnSize, int **returnColumnSizes)
 {
 	printf("\n Matrix are: \n");
-
-	for(int i = 2; i<6; i++) {
+	
+	for(int i = 2; i<returnSize; i++) {
 		printf("matrix[%d]: elements are : ", i);
-		for(int j=0; j<4; j++) {
+		for(int j=0; j < *returnColumnSizes[i]; j++) {
 			printf("%d->", matrix[i][j]);
 		}
 		printf("\n");
 	}
 
 	printf("\n");
+}
+
+int** verticalTraversal(node* root, int* returnSize, int** returnColumnSizes)
+{
+	int beg = 3; // Negative index is not there in C so started with 3
+	int ** returnColumnSize;
+	int **matrix = (int **) malloc (sizeof(int *) * (find_height(root) - 1)); 
+	returnColumnSize = (int **) malloc (sizeof(int *) * (find_height(root) - 1)); 
+
+	for (int i = 0; i < find_height(root)-1; i++) {
+		returnColumnSize[i] = (int *)malloc(sizeof(int));
+		returnColumnSizes[i] = returnColumnSize[i];
+		matrix[i] = malloc(sizeof(int));
+		*matrix[i] = 0;
+		*returnColumnSize[i] = 0;
+	}
+
+	solve(root, beg, matrix, returnSize, returnColumnSize);
+
+	printf("\ncolumn Sizes are as follows:");
+
+
+	for(int j=0; j < 5; j++)
+		printf("%d->", *returnColumnSizes[j]);
+
+	*returnSize = find_height(root) - 1;
+
+	return matrix;
 }
 
 int main()
@@ -156,8 +163,7 @@ int main()
 	int **matrix = verticalTraversal(root, &returnSize, returnColumnSizes);
 	
 	printf("\n vertal Tree: \n");
-	
-	print_matrix(matrix);
+	print_matrix(matrix, returnSize, returnColumnSizes);
 
 	printf("\n");
 
