@@ -118,25 +118,15 @@ void print_matrix(int **matrix, int returnSize, int **returnColumnSizes)
 int** verticalTraversal(node* root, int* returnSize, int** returnColumnSizes)
 {
 	int beg = 3; // Negative index is not there in C so started with 3
-	int ** returnColumnSize;
 	int **matrix = (int **) malloc (sizeof(int *) * (find_height(root) - 1)); 
-	returnColumnSize = (int **) malloc (sizeof(int *) * (find_height(root) - 1)); 
 
 	for (int i = 0; i < find_height(root)-1; i++) {
-		returnColumnSize[i] = (int *)malloc(sizeof(int));
-		returnColumnSizes[i] = returnColumnSize[i];
+		returnColumnSizes[i] = (int *)malloc(sizeof(int));
 		matrix[i] = malloc(sizeof(int));
 		*matrix[i] = 0;
-		*returnColumnSize[i] = 0;
 	}
 
-	solve(root, beg, matrix, returnSize, returnColumnSize);
-
-	printf("\ncolumn Sizes are as follows:");
-
-
-	for(int j=0; j < 5; j++)
-		printf("%d->", *returnColumnSizes[j]);
+	solve(root, beg, matrix, returnSize, returnColumnSizes);
 
 	*returnSize = find_height(root) - 1;
 
@@ -161,10 +151,9 @@ int main()
 	printf("\n");
 
 	int **matrix = verticalTraversal(root, &returnSize, returnColumnSizes);
-	
-	printf("\n vertal Tree: \n");
+#if 1	
+	printf("\nvertal Tree: \n");
 	print_matrix(matrix, returnSize, returnColumnSizes);
-
 	printf("\n");
 
 	for (int i = 0; i < find_height(root)-1; i++) {
@@ -173,6 +162,6 @@ int main()
 	}
 
 	free(matrix);
-
+#endif
 	return 0;
 }
