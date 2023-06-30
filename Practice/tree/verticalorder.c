@@ -167,7 +167,12 @@ int main()
 
 	printf("\n");
 
-	//TODO: Need to free the elements allocated for double pointer
+	for (int i = 0; i < find_height(root)-1; i++) {
+		free(returnColumnSizes[i]);
+		free(matrix[i]);
+	}
+
+	free(matrix);
 
 	return 0;
 }
