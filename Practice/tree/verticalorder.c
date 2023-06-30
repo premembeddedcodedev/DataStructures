@@ -49,25 +49,6 @@ int find_height(node * root)
 	}
 }
 
-void solve(node *root, int row, int **matrix, int *returnSize, int** returnColumnSizes)
-{
-	if(!root) {
-		return;
-	}
-	printf("%d->", root->data);
-	
-	returnColumnSizes[row] = realloc(returnColumnSizes[row], (*(returnColumnSizes[row]) + 1) * 4);
-
-	matrix[row][*(returnColumnSizes[row])] = root->data;
-
-	*(returnColumnSizes[row]) += 1;
-
-	/*Need to why row-1 is instead of *row*/
-	solve(root->left, row-1, matrix, returnSize, returnColumnSizes);
-	
-	solve(root->right, row+1, matrix, returnSize, returnColumnSizes);
-}
-
 
 node *build_bintree(int a[], int size, node *root, int *offset)
 {
@@ -113,6 +94,25 @@ void print_matrix(int **matrix, int returnSize, int **returnColumnSizes)
 	}
 
 	printf("\n");
+}
+
+void solve(node *root, int row, int **matrix, int *returnSize, int** returnColumnSizes)
+{
+	if(!root) {
+		return;
+	}
+	printf("%d->", root->data);
+
+	//its good logic	
+	matrix[row] = realloc(matrix[row], (*(returnColumnSizes[row]) + 1) * 4);
+	matrix[row][*(returnColumnSizes[row])] = root->data;
+
+	*(returnColumnSizes[row]) += 1;
+
+	/*Need to why row-1 is instead of *row*/
+	solve(root->left, row-1, matrix, returnSize, returnColumnSizes);
+	
+	solve(root->right, row+1, matrix, returnSize, returnColumnSizes);
 }
 
 int** verticalTraversal(node* root, int* returnSize, int** returnColumnSizes)
