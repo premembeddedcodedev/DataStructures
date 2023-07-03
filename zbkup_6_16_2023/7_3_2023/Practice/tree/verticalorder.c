@@ -104,7 +104,8 @@ void solve(node *root, int row, int **matrix, int *returnSize, int** returnColum
 	printf("%d->", root->data);
 
 	//its good logic	
-	matrix[row] = realloc(matrix[row], (*(returnColumnSizes[row]) + 1) * 4);
+	//matrix[row] = realloc(matrix[row], (*(returnColumnSizes[row]) + 1) * 4);
+	matrix[row] = malloc((*(returnColumnSizes[row]) + 1) * 4);
 	matrix[row][*(returnColumnSizes[row])] = root->data;
 
 	*(returnColumnSizes[row]) += 1;
@@ -119,10 +120,10 @@ int** verticalTraversal(node* root, int* returnSize, int** returnColumnSizes)
 	int beg = 3; // Negative index is not there in C so started with 3
 	int **matrix = (int **) malloc (sizeof(int *) * (find_height(root) + 2)); 
 
+	matrix[0] = malloc(sizeof(int));
 	for (int i = 0; i < find_height(root)+2; i++) {
 		returnColumnSizes[i] = (int *)malloc(sizeof(int));
-		matrix[i] = malloc(sizeof(int));
-		*matrix[i] = 0;
+		//*matrix[i] = 0;
 	}
 
 	solve(root, beg, matrix, returnSize, returnColumnSizes);
