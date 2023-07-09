@@ -101,16 +101,18 @@ int main()
 	struct ListNode *list1 = NULL, *list2 = NULL, *result = NULL;
 	int i, num, element;
 
-	printf("Enter the List count :\n");
+	printf("Enter the 1st List count :\n");
 	scanf("%d", &num);
 
+	printf("Enter %d List Values :\n", num);
 	for(i=0; i<num; i++) {
 		scanf("%d", &element);
 		list_push(&list1, element);
 	}
 
-	printf("Enter the List count :\n");
+	printf("Enter the 2nd List count :\n");
 	scanf("%d", &num);
+	printf("Enter %d List Values :\n", num);
 	for(i=0; i<num; i++) {
 		scanf("%d", &element);
 		list_push(&list2, element);

@@ -95,7 +95,7 @@ void ll_part_reverse(int lb, int ub)
 	list *last, *curr = head, *prev = NULL/*imp*/, *newend, *next;
 	if(!curr)
 		return;
-
+	/* Setting up prev, curr, next pointers to save reverse */
 	while(curr && templrb != lb) {
 		prev = curr;
 		templrb++;
@@ -105,6 +105,7 @@ void ll_part_reverse(int lb, int ub)
 	last = prev;
 	newend = curr;
 
+	/* point older prev, curr and next saved pointers to end of parts */
 	while(curr && templrb != ub) {
 		next = curr->link;
 		curr->link = prev;
