@@ -16,7 +16,6 @@ void swap(int *src, int *dest)
  *  1 2 3 5 8 9 --> 
  * */
 
-
 void insertionsort(int *a, int size)
 {
 	int  j = 0;
@@ -39,44 +38,6 @@ void insertionsort(int *a, int size)
 	}
 }
 
-int checkplace(int *stall, int size, int value)
-{
-	int i = 1; //0th offset must have cow so starting from 1
-	int count = 1; //first slot should be calculated
-
-	while(i <= size-1) {
-		if(value <= (stall[i] - stall[i-1]))
-			count++;
-		i++;
-	}
-	
-	printf("We can place with %d distance\n", value);
-
-	return count;
-}
-
-int aggressiveCows(int *stall, int size, int cows)
-{
-	insertionsort(stall, size);
-	printf("Sorted Arrays: \n");
-	for(int i = 0; i<size; i++)
-		printf("%d", stall[i]);
-	printf("\n");
-	
-	int start = 0, end = stall[size-1], mid = 0;
-
-	while(start <= end) {
-		mid = start + (end-start)/2;
-
-		if(checkplace(stall, size, mid) >= cows)
-			start = mid + 1;
-		else
-			end = mid - 1;
-	}
-
-	return mid;
-}
-
 int main()
 {
 	//int stall[] = {0, 3, 4, 7, 11, 9}, cows = 4;	
@@ -89,7 +50,11 @@ int main()
 		printf("%d", stall[i]);
 	printf("\n");
 	
-	printf("Max of min arrangement is %d\n", aggressiveCows(stall, sizeof(stall)/sizeof(int), cows));
+	insertionsort(stall, sizeof(stall)/sizeof(int));
+	printf("Sorted Arrays: \n");
+	for(int i = 0; i<sizeof(stall)/sizeof(int); i++)
+		printf("%d", stall[i]);
+	printf("\n");
 	
 	return 0;
 }
