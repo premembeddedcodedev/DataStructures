@@ -86,7 +86,7 @@ bool qfull(Q *qdata, int vertices)
 
 bool qempty(Q *qdata)
 {
-	if(qdata->front <= qdata->rear)
+	if(qdata->front < qdata->rear)
 		return false;
 	else
 		return true;
@@ -159,7 +159,17 @@ int main()
 	glist *graph = create_graph(list_count);
 	if(!graph)
 		return -1;
-
+	
+#if 0
+	create_sublists(graph, 0, 1);
+	create_sublists(graph, 0, 2);
+	create_sublists(graph, 0, 4);
+	create_sublists(graph, 1, 0);
+	create_sublists(graph, 2, 0);
+	create_sublists(graph, 3, 4);
+	create_sublists(graph, 4, 0);
+	create_sublists(graph, 4, 3);
+#else
 	create_sublists(graph, 0, 1);
 	create_sublists(graph, 0, 2);
 	create_sublists(graph, 0, 3);
@@ -170,8 +180,8 @@ int main()
 	create_sublists(graph, 2, 4);
 	create_sublists(graph, 3, 0);
 	create_sublists(graph, 4, 2);
-
-	print(graph, list_count);
+#endif
+	print(graph, 5/*list_count*/);
 
 	qdata.front = -1;
 	qdata.rear = -1;
@@ -181,6 +191,7 @@ int main()
 	bfs_traversal(graph, &qdata, list_count, 2);
 
 	memset(graph->visited, 0, sizeof(graph->visited));
-	
-	dfs_traversal(graph, 1);
+
+	printf("DFS Traversal: \n");	
+	dfs_traversal(graph, 0);
 }
