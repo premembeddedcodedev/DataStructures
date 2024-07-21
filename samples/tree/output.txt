@@ -1,0 +1,10 @@
+# ./a.out
+Enter Node value: 1
+Enter Node value: 2
+Enter Node value: 0
+Enter Node value: 0
+Enter Node value: 3
+Enter Node value: 0
+Enter Node value: 0
+Printing pre order traversal: 1 2 3 #
+

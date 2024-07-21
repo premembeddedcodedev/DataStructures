@@ -1,0 +1,13 @@
+# ./a.out
+Enter the array bound
+7
+Array values:
+9
+6
+5
+8
+3
+0
+2
+Heap Values are :
+9, 8, 5, 6, 3, 0, 2,

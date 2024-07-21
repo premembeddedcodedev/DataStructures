@@ -1,0 +1,15 @@
+# ./a.out
+Number of vertices
+4
+Number of links
+3
+Enter the src and dest : 1
+2
+Enter the src and dest : 2
+3
+Enter the src and dest : 4
+2
+vertice-(0) :
+vertice-(1) : 2 ->
+vertice-(2) : 3 ->
+vertice-(3) :
