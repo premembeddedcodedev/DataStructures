@@ -21,8 +21,12 @@ int recpathsum(int a[][MAX], int rows, int cols, int max_rows, int max_cols)
 	return total;
 }
 
+int reciter = 0;
+
 int memopathsum(int a[][MAX], unordered_map<string, int> &hmap, int rows, int cols, int max_rows, int max_cols)
 {
+	reciter++;
+
 	string key;
         if((rows == max_rows) && (cols == max_cols))
                 return a[rows][cols];
@@ -32,16 +36,16 @@ int memopathsum(int a[][MAX], unordered_map<string, int> &hmap, int rows, int co
 
 	key = to_string(rows) + '#'+ to_string(cols);
 	if(hmap[key] > 1) {
-		cout << key << ":" << "value : " << hmap[key] << "\n";
+		//cout << "\n" << key << ":" << "value : " << hmap[key] << "\n";
 		return hmap[key];
 	}
 	hmap[key] = 0;
-  
+
         int side = memopathsum(a, hmap, rows, cols+1, max_rows, max_cols);
         int down = memopathsum(a, hmap, rows+1, cols, max_rows, max_cols);
 	
 	string key2 = to_string(rows) + '#'+ to_string(cols);
-	//cout << "\n" << key2;
+	//cout << "\n key2 : " << key2;
 	hmap[key2] = 0;
 	hmap[key2] = a[rows][cols] + max(side, down);
 
@@ -82,6 +86,8 @@ int main() {
 
 	for (auto x : hmap) 
 		cout << x.first << " " << x.second << endl; 
+
+	printf("\nreciter : %d\n", reciter);
 
 	return 0;
 }
