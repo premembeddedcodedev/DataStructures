@@ -7,7 +7,7 @@
 #include <cstring>
 using namespace std;
 
-#define MAX 10
+#define MAX 20
 
 int reciter = 0;
 
@@ -20,6 +20,11 @@ void findallpaths(int a[][MAX], vector<string> &slist, char s[MAX], unordered_ma
 		return;
 	}
 	
+	if((rows > 1) && (cols > 1)) {
+		s[soff] = 'D';
+		findallpaths(a, slist, s, hmap, rows-1, cols-1, soff+1);	
+	}
+
 	if(rows > 1) {
 		s[soff] = 'V';
 		findallpaths(a, slist, s, hmap, rows-1, cols, soff+1);
@@ -60,7 +65,7 @@ int main()
 	vector<string> slist;
 	findallpaths(a, slist, str, hmap, rows, cols, 0);
 
-	//cout << "reciter : "<< reciter << "\n";
+	cout << "reciter : "<< reciter << "\n";
 
 	//for(auto it = slist.begin(); it!=slist.end(); it++)
 	//	cout << *it << "\n" << endl;
